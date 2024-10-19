@@ -15,11 +15,16 @@ def divide_video(input_path, output_dir, interval, count_start=1):
         # Definir os tempos de início e fim
 
         print(f"************Criando subclipe {clip_count}************\n")
+        
         end_time = start_time + interval_seconds
+
+        if end_time > total_duration:
+            end_time = total_duration
+
         subclip = video.subclip(start_time, end_time)
         
         # Exportar o subclip para o diretório de saída
-        output_path = f"{output_dir}/subclip_{clip_count}.mp4"
+        output_path = f"{output_dir}/s/ubclip_{clip_count}.mp4"
         subclip.write_videofile(output_path, codec="libx264", 
                                 audio_codec="aac", threads=8)
         clip_count += 1
@@ -28,7 +33,7 @@ def divide_video(input_path, output_dir, interval, count_start=1):
     video.close()
 
 # Exemplo de uso
-input_video_path = "C:/Videos brutos/19-10-2024/19-10-Clipe Source-1.mp4"
+input_video_path = "C:/Videos brutos/19-10-2024/19-10-Clipe-Source-3.mp4"
 pasta_destino = "C:/Videos brutos/19-10-2024"
 duracao_subclip = 3  # em minutos
 count_start = 1
